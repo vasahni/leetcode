@@ -9,6 +9,7 @@ from dsa.arrays_and_strings import check_palindrome
         ("madam", True),
         ("hello", False),
         ("palindrome", False),
+        ("", True),
     ],
 )
 def test_palindrome(word, expected):
