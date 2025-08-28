@@ -8,3 +8,6 @@ version = "0.0.1"
 
 [tool.setuptools.packages.find]
 where = ["."]
+
+[tool.black]
+line-length = 80
