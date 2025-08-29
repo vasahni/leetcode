@@ -1,3 +1,6 @@
+import math
+
+
 def check_palindrome(string: str) -> bool:
     """
     Example 1: Given a string s, return true if it is a palindrome, false otherwise.
@@ -50,8 +53,33 @@ def combine_sorted_arrays(arr1: list[int], arr2: list[int]) -> list[int]:
     while i < len(arr1):
         combined_array.append(arr1[i])
         i += 1
-
     while j < len(arr2):
         combined_array.append(arr2[j])
         j += 1
     return combined_array
+
+
+def reverse_string(s: list[str]) -> list[str]:
+    l = 0
+    r = len(s) - 1
+    while l < r:
+        temp = s[r]
+        s[r] = s[l]
+        s[l] = temp
+        l += 1
+        r -= 1
+    return s
+
+
+def sorted_squares(nums: list[int]) -> list[int]:
+    l = 0
+    r = len(nums) - 1
+    final_array = [0] * len(nums)
+    for i in range(len(nums) - 1, -1, -1):
+        if abs(nums[l]) <= abs(nums[r]):
+            final_array[i] = nums[r] * nums[r]
+            r -= 1
+        else:
+            final_array[i] = nums[l] * nums[l]
+            l += 1
+    return final_array
