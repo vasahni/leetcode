@@ -78,3 +78,29 @@ def max_sum_length_k(arr: list[int], k: int) -> int:
         curr -= arr[i - k]
         ans = max(ans, curr)
     return ans
+
+
+def max_average_subarray(arr: list[int], k: int) -> float:
+    curr = ans = 0
+    for i in range(k):
+        curr += arr[i]
+    ans = curr / k
+    for i in range(k, len(arr)):
+        curr += arr[i]
+        curr -= arr[i - k]
+        ans = max(ans, curr / k)
+    return ans
+
+
+def max_consecutive_ones(nums: list[int], k: int) -> int:
+    left = curr = ans = 0
+    for right in range(len(nums)):
+        if nums[right] == 0:
+            curr += 1
+        while curr > k:
+            if nums[left] == 0:
+                curr -= 1
+            left += 1
+        ans = max(ans, right - left + 1)
+
+    return ans

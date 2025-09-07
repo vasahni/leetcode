@@ -1,6 +1,8 @@
 import pytest
 from dsa.sliding_windows import (
     flip_single_zero,
+    max_average_subarray,
+    max_consecutive_ones,
     max_sum_length_k,
     subarray_highest_sum,
     subarray_product_less_k,
@@ -46,3 +48,25 @@ def test_subarray_product_less_k(arr, k, ans):
 )
 def test_max_sum_length_k(arr, k, ans):
     assert max_sum_length_k(arr, k) == ans
+
+
+@pytest.mark.parametrize(
+    "arr, k, ans",
+    [
+        ([1, 12, -5, -6, 50, 3], 4, 12.75),
+        ([5], 1, 5),
+    ],
+)
+def test_max_average_subarray(arr, k, ans):
+    assert max_average_subarray(arr, k) == ans
+
+
+@pytest.mark.parametrize(
+    "nums, k, ans",
+    [
+        ([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2, 6),
+        ([0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1], 3, 10),
+    ],
+)
+def test_max_consecutive_ones(nums, k, ans):
+    assert max_consecutive_ones(nums, k) == ans
