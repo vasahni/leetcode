@@ -27,6 +27,8 @@ def build_prefix(nums):
     return prefix
 """
 
+import math
+
 
 def subarray_sums(
     nums: list[int], queries: list[list], limit: int
@@ -38,4 +40,40 @@ def subarray_sums(
     for x, y in queries:
         curr = prefix[y] - prefix[x] + nums[x]
         results.append(curr < limit)
+    return results
+
+
+def array_splits(nums: list[int]) -> int:
+    prefix = [nums[0]]
+    results = 0
+    for num in nums[1:]:
+        prefix.append(num + prefix[-1])
+    for i in range(len(nums) - 1):
+        left = prefix[i]
+        right = prefix[-1] - prefix[i]
+        if left > right:
+            results += 1
+    return results
+
+
+def min_start_value(nums: list[int]) -> int:
+    total = 0
+    ans = 1
+    for num in nums:
+        total += num
+        ans = max(ans, total * -1 + 1)
+    return ans
+
+
+def k_radius_subarray(nums: list[int], k: int) -> list[int]:
+    prefix = [nums[0]]
+    for num in nums[1:]:
+        prefix.append(prefix[-1] + num)
+    results = []
+    for i in range(len(nums)):
+        if (i + k >= len(nums)) or (i - k < 0):
+            results.append(-1)
+            continue
+        sum = prefix[i + k] - prefix[i - k] + nums[i - k]
+        results.append(math.floor(sum / (2 * k + 1)))
     return results
